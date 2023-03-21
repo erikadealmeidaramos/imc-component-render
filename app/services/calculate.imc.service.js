@@ -1,4 +1,4 @@
-import { calculateImcAPI } from '../drivers/calculate.imc.api.js';
+import { calculateImcAPI, loadTableAPI } from '../drivers/calculate.imc.api.js';
 import { Person } from '../models/domain.js';
 
 export class CalculateImcService {
@@ -10,5 +10,9 @@ export class CalculateImcService {
             if (response && response.imc)
                 callback(new Person(height, weight, response.imc, response.imcDescription));
         });
+    }
+
+    loadTable(callback){
+        return loadTableAPI(callback);
     }
 }

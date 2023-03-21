@@ -3,23 +3,8 @@ import { ViewComponent } from "../framework/view.component.js";
 
 export class ImcTableViewComponent extends ViewComponent {
     render() {
-        let templateStr = "";
-        if (!this.state) return templateStr;
-
-        let records = "";
-
-        if(this.state != null)
-        this.state.forEach((value,key)=>{
-            records += `
-            <tr>
-                <td>${key}</td>
-                <td>${value}</td>
-            </tr>
-            `;
-        });
-
         return `
-        <table>
+        <table border="1">
             <thead>
                 <tr>
                     <th>Classificação</th>
@@ -27,7 +12,16 @@ export class ImcTableViewComponent extends ViewComponent {
                 </tr>
             </thead>
             <tbody>
-                ${records}
+                ${
+                    this.state.data &&
+                    Object.keys(this.state.data)
+                    .map(k=> `
+                        <tr>
+                            <td>${this.state.data[k]}</td>
+                            <td>${k}</td>
+                        </tr>
+                    `).join('')
+                }
             </tbody>
         </table>
         `;
